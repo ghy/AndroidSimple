@@ -1,6 +1,5 @@
 package cn.youmay;
 
-import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.AbstractChart;
 
@@ -12,13 +11,10 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.AttributeSet;
-import android.view.View;
-import android.view.Window;
 
 public class ManiActivity extends Activity {
 
-	private AbstractChart getAbstractChart() {
+	private AbstractChart getMyTimeChart() {
 		MyChart myChart = new MyChart();
 
 		AbstractChart mChart = new MyTimeChart(
@@ -33,19 +29,19 @@ public class ManiActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		AbstractChart mChart = getAbstractChart();
-		GraphicalView mView = new GraphicalView(this, mChart);
+		AbstractChart mChart = getMyTimeChart();
+		GraphicalView mView = new MyView(this, mChart);
 
-		String title = savedInstanceState.getString(ChartFactory.TITLE);
+		/*String title = savedInstanceState.getString(ChartFactory.TITLE);
 		if (title == null) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		} else if (title.length() > 0) {
 			setTitle(title);
-		}
+		}*/
 		setContentView(mView);
 	}
 
-	class MyView extends GraphicalView implements Runnable {
+	public class MyView extends GraphicalView implements Runnable {
 
 		private int x = 20, y = 20;
 

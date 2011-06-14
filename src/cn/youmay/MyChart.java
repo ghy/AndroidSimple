@@ -24,15 +24,14 @@ public class MyChart {
 
 	private static final int HOURS = 24;
 
-	
 	public String getName() {
 		return "My Chart";
 	}
-	
+
 	public String getDesc() {
 		return "My Chart";
 	}
-	
+
 	/**
 	 * Builds an XY multiple time dataset using the provided values.
 	 * 
@@ -60,7 +59,7 @@ public class MyChart {
 		}
 		return dataset;
 	}
-	
+
 	private XYMultipleSeriesDataset buildDataset(String[] titles,
 			List<double[]> xValues, List<double[]> yValues) {
 		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
@@ -77,7 +76,7 @@ public class MyChart {
 		}
 		return dataset;
 	}
-	
+
 	/**
 	 * Builds an XY multiple series renderer.
 	 * 
@@ -107,7 +106,7 @@ public class MyChart {
 		}
 		return renderer;
 	}
-	
+
 	/**
 	 * Sets a few of the series renderer settings.
 	 * 
@@ -184,8 +183,8 @@ public class MyChart {
 
 		PointStyle[] styles = new PointStyle[] { PointStyle.POINT,
 				PointStyle.POINT, PointStyle.POINT };
-		
-		XYMultipleSeriesRenderer renderer = buildRenderer(colors, styles);
+
+		renderer = buildRenderer(colors, styles);
 		int length = renderer.getSeriesRendererCount();
 		for (int i = 0; i < length; i++) {
 			XYSeriesRenderer seriesRenderer = (XYSeriesRenderer) renderer
