@@ -31,6 +31,12 @@ public class MyChart {
 	public String getDesc() {
 		return "My Chart";
 	}
+	
+	DataProvider dataProvider;
+	
+	public MyChart(DataProvider dp){
+		dataProvider=dp;
+	}
 
 	/**
 	 * Builds an XY multiple time dataset using the provided values.
@@ -167,15 +173,18 @@ public class MyChart {
 			dateList.add(dates);
 		}
 		List<double[]> values = new ArrayList<double[]>();
-
-		values.add(new double[] { 1.2, 1.5, 1.7, 1.5, 1.4, 1.4, 1.3, 1.1, 0.3,
-				0.2, 2.9, 2.7, 2.6, 2.9, 0.3, 0.6, 0.9, 1.2, 1.6, 1.9, 2.1,
-				1.7, 1.5, 2.0 });
-
-		values.add(new double[] { 1.9, 1.2, 0.9, 0.5, 0.1, 0.5, 0.6, 1.9, 1.9,
-				1.8, 0.3, 1.4, 2.4, 2.9, 3.0, 1.4, 2.4, 2.0, 1.5, 0.9, 0.5,
-				1.9, 1.9, 2.5 });
-
+		
+		double[] ds1=new double[24];
+		for(int i=0;i<ds1.length;i++){
+			ds1[i]=Math.random()*3;
+		}
+		
+		double[] ds2=new double[24];
+		for(int i=0;i<ds2.length;i++){
+			ds2[i]=Math.random()*3;
+		}
+		values.add(dataProvider.getInValues());
+		values.add(dataProvider.getOutValues());
 		values.add(new double[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 				2, 2, 2, 2, 2, 2, 2, 2, 2 });
 
@@ -224,22 +233,6 @@ public class MyChart {
 		}
 	}
 
-	public Intent getTimeChartIntent(Context context,
-			XYMultipleSeriesDataset dataset, XYMultipleSeriesRenderer renderer,
-			String format) {
-		return getTimeChartIntent(context, dataset, renderer, format, "");
-	}
-
-	public Intent getTimeChartIntent(Context context,
-			XYMultipleSeriesDataset dataset, XYMultipleSeriesRenderer renderer,
-			String format, String activityTitle) {
-		checkParameters(dataset, renderer);
-		Intent intent = new Intent(context, null);
-		MyTimeChart chart = new MyTimeChart(dataset, renderer);
-		chart.setDateFormat(format);
-		intent.putExtra(ChartFactory.CHART, chart);
-		intent.putExtra(ChartFactory.TITLE, activityTitle);
-		return intent;
-	}
+	
 
 }

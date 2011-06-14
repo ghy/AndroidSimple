@@ -1,5 +1,8 @@
 package cn.youmay;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.AbstractChart;
 
@@ -15,30 +18,72 @@ import android.os.Message;
 public class ManiActivity extends Activity {
 
 	private AbstractChart getMyTimeChart() {
-		MyChart myChart = new MyChart();
+		
+		DataProvider dp=new DataProvider();
+		
+		MyChart myChart = new MyChart(dp);
 
 		AbstractChart mChart = new MyTimeChart(
 				myChart.getXYMultipleSeriesDataset(),
-				myChart.getXYMultipleSeriesRenderer());
+				myChart.getXYMultipleSeriesRenderer(),dp);
 
 		return mChart;
+	}
+
+	int title = 0;
+	private Handler mHandler = new Handler() {
+
+		public void handleMessage(Message msg) {
+			Context t=(Context)msg.obj;
+			AbstractChart mChart = getMyTimeChart();
+			GraphicalView mView = new GraphicalView(t, mChart);
+			setContentView(mView);
+			
+		};
+	};
+
+	private class MyTask extends TimerTask {
+		Context t;
+		public MyTask(Context context){
+			t=context;
+		}
+		
+		@Override
+		public void run() {
+
+			Message message = new Message();
+			message.obj=t;
+			mHandler.sendMessage(message);
+
+		}
+	}
+
+	public void updateTitle() {
+
+		setTitle("Welcome to Mr Wei's blog " + title);
+		title++;
 	}
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		AbstractChart mChart = getMyTimeChart();
-		GraphicalView mView = new MyView(this, mChart);
 
-		/*String title = savedInstanceState.getString(ChartFactory.TITLE);
-		if (title == null) {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-		} else if (title.length() > 0) {
-			setTitle(title);
-		}*/
-		setContentView(mView);
+		/*AbstractChart mChart = getMyTimeChart();
+		GraphicalView mView = new GraphicalView(this, mChart);
+
+		
+		 * String title = savedInstanceState.getString(ChartFactory.TITLE); if
+		 * (title == null) { requestWindowFeature(Window.FEATURE_NO_TITLE); }
+		 * else if (title.length() > 0) { setTitle(title); }
+		 
+		setContentView(mView);*/
+		
+		
+		
+
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new MyTask(this), 1, 1000);
 	}
 
 	public class MyView extends GraphicalView implements Runnable {
