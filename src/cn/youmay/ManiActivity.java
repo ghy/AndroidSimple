@@ -19,14 +19,14 @@ public class ManiActivity extends Activity {
 
 	private AbstractChart getMyTimeChart() {
 		
-		DataProvider dp=new DataProvider();
-		
-		MyChart myChart = new MyChart(dp);
-
-		AbstractChart mChart = new MyTimeChart(
+		DataProvider dataProvider=new DataProvider();
+		MyChart myChart = new MyChart(dataProvider);
+			
+		MyTimeChart mChart = new MyTimeChart(
 				myChart.getXYMultipleSeriesDataset(),
-				myChart.getXYMultipleSeriesRenderer(),dp);
-
+				myChart.getXYMultipleSeriesRenderer(),
+				dataProvider.getTotal());
+		mChart.setDateFormat("HH:mm");
 		return mChart;
 	}
 

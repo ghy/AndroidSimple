@@ -11,12 +11,12 @@ import android.graphics.Paint;
 
 public class MyTimeChart extends TimeChart {
 	
-	DataProvider dataProvider;
+	DataTotal total;
 
 	public MyTimeChart(XYMultipleSeriesDataset arg0,
-			XYMultipleSeriesRenderer arg1,DataProvider dataProvider) {
+			XYMultipleSeriesRenderer arg1,DataTotal total) {
 		super(arg0, arg1);
-		this.dataProvider=dataProvider;
+		this.total=total;
 	}
 
 	
@@ -39,15 +39,15 @@ public class MyTimeChart extends TimeChart {
 
 		canvas.drawText("In", 300, 360, paint);
 		canvas.drawText("Avg:", 350, 360, paint);
-		canvas.drawText(f.format(dataProvider.getInAvg())+"MB/S", 390, 360, paint);
+		canvas.drawText(f.format(total.inAvg)+"MB/S", 390, 360, paint);
 		canvas.drawText("Max:", 480, 360, paint);
-		canvas.drawText(f.format(dataProvider.getInMax())+"MB/S", 520, 360, paint);
+		canvas.drawText(f.format(total.inMax)+"MB/S", 520, 360, paint);
 
 		canvas.drawText("Out", 300, 380, paint);
 		canvas.drawText("Avg:", 350, 380, paint);
-		canvas.drawText(f.format(dataProvider.getOutAvg())+"MB/S", 390, 380, paint);
+		canvas.drawText(f.format(total.outAvg)+"MB/S", 390, 380, paint);
 		canvas.drawText("Max:", 480, 380, paint);
-		canvas.drawText(f.format(dataProvider.getOutMax())+"MB/S", 520, 380, paint);
+		canvas.drawText(f.format(total.outMax)+"MB/S", 520, 380, paint);
 	}
 
 }

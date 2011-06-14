@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.achartengine.ChartFactory;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
 
@@ -66,23 +62,7 @@ public class MyChart {
 		return dataset;
 	}
 
-	private XYMultipleSeriesDataset buildDataset(String[] titles,
-			List<double[]> xValues, List<double[]> yValues) {
-		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-		int length = titles.length;
-		for (int i = 0; i < length; i++) {
-			XYSeries series = new XYSeries(titles[i]);
-			double[] xV = xValues.get(i);
-			double[] yV = yValues.get(i);
-			int seriesLength = xV.length;
-			for (int k = 0; k < seriesLength; k++) {
-				series.add(xV[k], yV[k]);
-			}
-			dataset.addSeries(series);
-		}
-		return dataset;
-	}
-
+	
 	/**
 	 * Builds an XY multiple series renderer.
 	 * 
@@ -220,17 +200,6 @@ public class MyChart {
 		renderer.setBackgroundColor(Color.GRAY);
 		renderer.setApplyBackgroundColor(true);
 		return buildDateDataset(titles, dateList, values);
-	}
-
-	private static void checkParameters(XYMultipleSeriesDataset dataset,
-			XYMultipleSeriesRenderer renderer) {
-		if (dataset == null
-				|| renderer == null
-				|| dataset.getSeriesCount() != renderer
-						.getSeriesRendererCount()) {
-			throw new IllegalArgumentException(
-					"Dataset and renderer should be not null and should have the same number of series");
-		}
 	}
 
 	
