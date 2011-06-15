@@ -14,10 +14,6 @@ import android.graphics.Color;
 import android.graphics.Paint.Align;
 
 public class MyChart {
-	private static final long HOUR = 3600 * 1000;
-
-	private static final long DAY = HOUR * 24;
-
 	private static final int HOURS = 24;
 
 	public String getName() {
