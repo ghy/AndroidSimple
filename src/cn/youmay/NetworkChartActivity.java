@@ -18,9 +18,10 @@ import android.widget.ImageView;
 
 public class NetworkChartActivity extends Activity {
 	
-	//图片的URL
-	private final String ImageUrl = "http://192.168.1.103:2727/home/getchart";
-
+	//图片的URL http://61.144.123.214:2712/
+	//private final String ImageUrl = "http://192.168.1.103:2727/home/getchart";
+	private final String ImageUrl = "http://61.144.123.214:2712/home/getchart";
+	
 	private ImageView imageView;
 
 	@Override
@@ -31,7 +32,7 @@ public class NetworkChartActivity extends Activity {
 		//imageView.setImageResource(R.drawable.chart1);
 
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new MyTask(this), 1, 20000);
+		timer.scheduleAtFixedRate(new MyTask(this), 1, 1000);
 	}
 
 	private Handler mHandler = new Handler() {
