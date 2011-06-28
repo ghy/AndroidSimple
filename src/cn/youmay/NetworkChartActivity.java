@@ -17,11 +17,12 @@ import android.os.Message;
 import android.widget.ImageView;
 
 public class NetworkChartActivity extends Activity {
-	
-	//图片的URL http://61.144.123.214:2712/
-	//private final String ImageUrl = "http://192.168.1.103:2727/home/getchart";
+
+	// 图片的URL http://61.144.123.214:2712/
+	// private final String ImageUrl =
+	// "http://192.168.1.103:2727/home/getchart";
 	private final String ImageUrl = "http://61.144.123.214:2712/home/getchart";
-	
+
 	private ImageView imageView;
 
 	@Override
@@ -29,7 +30,7 @@ public class NetworkChartActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.network);
 		imageView = (ImageView) findViewById(R.id.imageView1);
-		//imageView.setImageResource(R.drawable.chart1);
+		// imageView.setImageResource(R.drawable.chart1);
 
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new MyTask(this), 1, 1000);
@@ -37,7 +38,7 @@ public class NetworkChartActivity extends Activity {
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
-			try {		
+			try {
 				URL url = new URL(ImageUrl);
 				URLConnection conn = url.openConnection();
 				InputStream in = conn.getInputStream();
@@ -50,7 +51,7 @@ public class NetworkChartActivity extends Activity {
 	};
 
 	private class MyTask extends TimerTask {
-		
+
 		private Context context;
 
 		public MyTask(Context context) {
